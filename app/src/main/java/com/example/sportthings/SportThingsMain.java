@@ -12,22 +12,22 @@ import android.widget.TextView;
 import java.util.HashMap;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class SportThingsMain extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
-    TextView textViewQuantity;
     @BindView(R.id.textPrice) TextView txtTotalPrice;
+    @BindView(R.id.textPrice) TextView textViewQuantity;
     Spinner spinner;
     HashMap<String, Double> listFoodHashMap;
     private static int quantityProduct = 1;
     String productName;
-    Double totalPrice;
     Double productPrice;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sport_things_main);
-        textViewQuantity = findViewById(R.id.textQuantity);
+        ButterKnife.bind(this);
 
         spinner = findViewById(R.id.spinner);
         spinner.setOnItemSelectedListener(this);
@@ -44,13 +44,15 @@ public class SportThingsMain extends AppCompatActivity implements AdapterView.On
         listFoodHashMap.put("Avocado", 3.0);
         listFoodHashMap.put("White cabbage", 0.9);
         listFoodHashMap.put("Chickpeas", 1.1);
-
     }
 
     public void incQuantity(View view) {
         try {
             quantityProduct++;
             textViewQuantity.setText("" + quantityProduct);
+            productName = spinner.getSelectedItem().toString();
+            productPrice = listFoodHashMap.get(productName);
+            txtTotalPrice.setText("" + (productPrice * quantityProduct));
         } catch (Exception e){
             System.out.println(e);
         }
@@ -61,6 +63,9 @@ public class SportThingsMain extends AppCompatActivity implements AdapterView.On
             if(quantityProduct > 1){
                 quantityProduct--;
                 textViewQuantity.setText("" + quantityProduct);
+                productName = spinner.getSelectedItem().toString();
+                productPrice = listFoodHashMap.get(productName);
+                txtTotalPrice.setText("" + (productPrice * quantityProduct));
             }
         } catch (Exception e){
             System.out.println(e);
@@ -69,11 +74,11 @@ public class SportThingsMain extends AppCompatActivity implements AdapterView.On
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        quantityProduct = 1;
+
         productName = spinner.getSelectedItem().toString();
         productPrice = listFoodHashMap.get(productName);
-        totalPrice = productPrice * quantityProduct;
-        System.out.println(quantityProduct);
-        txtTotalPrice.setText("" + totalPrice);
+        txtTotalPrice.setText("" + (productPrice * quantityProduct));
     }
 
     @Override
