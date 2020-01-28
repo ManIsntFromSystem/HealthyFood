@@ -1,12 +1,17 @@
 <resources>
     <string name="app_name">Sport Things</string>
+    <string name="order_name">Your Order</string>
+
+
     <string name="currency_sign">$</string>
     <string name="quantity_text">Quantity</string>
     <string name="order_price_text">Order price</string>
     <string name="select_item_spinner">Select item</string>
     <string name="add_to_cart_button">ADD TO CART</string>
     <string name="sale_text">Sale -77 %</string>
-    <string name="input_edit_text">Input text</string>
+    <string name="input_edit_text">Input your name</string>
+    <string name="send_to_email">Send to email</string>
+    <string name="input_your_email">Input your email</string>
 
     <string-array name="food_list">
         <item>Broccoli</item>
